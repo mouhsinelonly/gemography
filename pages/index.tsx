@@ -9,21 +9,25 @@ import { fetcher } from '@lib/fetcher'
 
 
 export default function Home() {
+  // fetch repositories from rest api
   const { data, error, size, setSize } = useSWRInfinite<IRepo[]>(
     index =>
       `https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc&page=${index + 1}`,
     fetcher
   )
+  // check if request returned any errors
   const hasError = typeof error !== 'undefined'
+  // flatten returned 2 dimension array to 1 dimension
   const repositories: IRepo[] = data ? ([] as IRepo[]).concat(...data) : []
+  // check if request is still loading
   const isLoading: boolean = (!data && !hasError) || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
-
+  // handle loading more repositories
   const handleLoadMore = useCallback(() => {
     if (!isLoading) {
       setSize(size + 1)
     }
   }, [size, setSize, isLoading])
-
+  // create infinite scroll ref
   const infiniteRef = useInfiniteScroll({
     loading: isLoading,
     hasNextPage: !hasError,
