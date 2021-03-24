@@ -21,7 +21,6 @@ export default function Home() {
 
   // flatten returned 2 dimension array to 1 dimension
   const repositories: IRepo[] = data ? ([] as IRepo[]).concat(...data) : []
-
   // check if request is still loading
   const isLoading: boolean = (!data && !hasError) || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
 
@@ -47,7 +46,9 @@ export default function Home() {
   }, [repositories.length])
 
   return (
-    <div className='bg-white min-h-screen p-4 bg-gray-100' ref={infiniteRef}>
+    <div
+      className='bg-white min-h-screen p-4 bg-gray-100'
+      ref={infiniteRef}>
       <Head>
         <title>Gemography</title>
         <link rel="icon" href="/favicon.ico" />
