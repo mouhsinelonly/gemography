@@ -16,8 +16,7 @@ export default function Home() {
   )
   const hasError = typeof error !== 'undefined'
   const repositories: IRepo[] = data ? ([] as IRepo[]).concat(...data) : []
-  const isLoadingInitialData: boolean = !data && !hasError
-  const dataLoading: boolean = isLoadingInitialData === true || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
+  const dataLoading: boolean = (!data && !hasError) || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
 
   const handleLoadMore = useCallback(() => {
     if (!dataLoading) {
