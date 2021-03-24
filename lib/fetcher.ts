@@ -1,4 +1,4 @@
-export const fetcher = async (url: string) => {
+export const fetcher = async (url: string): Promise<IRepo[]> => {
     const res = await fetch(url)
     const data = await res.json()
 

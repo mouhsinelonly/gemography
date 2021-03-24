@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import { useSWRInfinite } from "swr";
+import { useSWRInfinite } from "swr"
 import { useCallback } from 'react'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
-import RepoRow from '@components/RepoRow'
+import { RepoRow } from '@components/RepoRow'
 import { fetcher } from '@lib/fetcher'
 
 
@@ -11,10 +11,10 @@ export default function Home() {
     index =>
       `https://api.github.com/search/repositories?q=created:>2017-10-22&sort=stars&order=desc&page=${index + 1}`,
     fetcher
-  );
+  )
   const hasError = typeof error !== 'undefined'
-  const repositories: IRepo[] = data ? ([] as IRepo[]).concat(...data) : [];
-  const isLoadingInitialData: boolean = !data && !hasError;
+  const repositories: IRepo[] = data ? ([] as IRepo[]).concat(...data) : []
+  const isLoadingInitialData: boolean = !data && !hasError
   const dataLoading: boolean = isLoadingInitialData === true || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
 
   const handleLoadMore = useCallback(() => {
@@ -22,6 +22,7 @@ export default function Home() {
       setSize(size + 1)
     }
   }, [size, setSize, dataLoading])
+
   const infiniteRef = useInfiniteScroll({
     loading: dataLoading,
     hasNextPage: !hasError,
