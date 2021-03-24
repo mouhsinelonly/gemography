@@ -14,7 +14,7 @@ export const RepoRow = ({ repo }: { repo: IRepo }) => <div className='my-4 flex 
             <div className='bg-yellow-100 px-2 text-sm text-yellow-800 rounded border border-yellow-300'>
                 Stars : {repo.stargazers_count}
             </div>
-            <div className='bg-red-100 px-2 text-sm text-red-800 rounded mx-2 border border-red-300'>
+            <div className='bg-red-100 px-2 text-sm text-red-800 rounded ml-2 sm:mr-2 border border-red-300'>
                 Issues: {repo.open_issues_count}
             </div>
             <div className='w-full text-gray-500 sm:w-auto mt-2 sm:mt-0 text-sm'>
