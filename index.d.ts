@@ -13,3 +13,9 @@ declare interface IRepoOwner {
     avatar_url: string
     login: string
 }
+
+declare interface PageProps { }
+declare interface IAppProps {
+    pageProps: PageProps,
+    Component: React.ElementType,
+}
