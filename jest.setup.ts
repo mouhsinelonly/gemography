@@ -1,7 +1,15 @@
 // jest.setup.ts
-import '@testing-library/jest-dom';
-// setup file
-import { configure } from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import '@testing-library/jest-dom'; import "@testing-library/jest-dom/extend-expect";
+import { cache } from "swr";
+import fetchMock from "jest-fetch-mock";
 
-configure({ adapter: new Adapter() });
+beforeEach(() => {
+    /* @ts-ignore */
+    fetch.resetMocks();
+});
+
+afterEach(() => {
+    cache.clear();
+});
+
+fetchMock.enableMocks();
