@@ -1,4 +1,6 @@
-export const RepoRow = ({ repo }: { repo: IRepo }) => <div className='my-4 flex p-4 bg-white rounded overflow-ellipsis overflow-hidden'>
+export const RepoRow = ({ repo }: { repo: IRepo }) => <div
+    data-testid='repo-row'
+    className='my-4 flex p-4 bg-white rounded overflow-ellipsis overflow-hidden'>
     <img
         src={repo.owner.avatar_url}
         alt={repo.owner.login}

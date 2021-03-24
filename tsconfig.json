@@ -4,6 +4,7 @@
     "paths": {
       "@lib/*": ["lib/*"],
       "@components/*": ["components/*"],
+      "@pages/*": ["pages/*"],
     },
     "allowJs": true,
     "alwaysStrict": true,
