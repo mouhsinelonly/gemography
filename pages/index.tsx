@@ -3,6 +3,8 @@ import { useSWRInfinite } from "swr"
 import { useCallback } from 'react'
 import useInfiniteScroll from 'react-infinite-scroll-hook'
 import { RepoRow } from '@components/RepoRow'
+import { ErrorMessage } from '@components/ErrorMessage'
+import { Loading } from '@components/Loading'
 import { fetcher } from '@lib/fetcher'
 
 
@@ -40,12 +42,8 @@ export default function Home() {
       }, []).map(repo => {
         return (<RepoRow key={repo.id} repo={repo} />);
       })}
-      {(dataLoading && !hasError) ? <div className='fixed bottom-0 animate-pulse mb-4 w-full  text-center justify-center items-center left-0 flex items-center'>
-        <div className='rounded-full bg-white py-2 px-8 bg-green-500 text-white'>Loading...</div>
-      </div> : null}
-      {(hasError) ? <div className='fixed bottom-0 px-4 mb-4 w-full  text-center justify-center items-center left-0 flex items-center'>
-        <div className='rounded-full bg-white py-2 px-8 bg-red-500 text-white'>{error.message}</div>
-      </div> : null}
+      {(dataLoading && !hasError) && <Loading />}
+      {hasError && <ErrorMessage message={error.message} />}
     </div>
   )
 }
