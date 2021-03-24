@@ -16,16 +16,16 @@ export default function Home() {
   )
   const hasError = typeof error !== 'undefined'
   const repositories: IRepo[] = data ? ([] as IRepo[]).concat(...data) : []
-  const dataLoading: boolean = (!data && !hasError) || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
+  const isLoading: boolean = (!data && !hasError) || (size > 0 && typeof data !== 'undefined' && typeof data[size - 1] === "undefined")
 
   const handleLoadMore = useCallback(() => {
-    if (!dataLoading) {
+    if (!isLoading) {
       setSize(size + 1)
     }
-  }, [size, setSize, dataLoading])
+  }, [size, setSize, isLoading])
 
   const infiniteRef = useInfiniteScroll({
-    loading: dataLoading,
+    loading: isLoading,
     hasNextPage: !hasError,
     onLoadMore: handleLoadMore
   }) as React.RefObject<HTMLDivElement>;
@@ -41,7 +41,7 @@ export default function Home() {
       }, []).map(repo => {
         return (<RepoRow key={repo.id} repo={repo} />);
       })}
-      {(dataLoading && !hasError) && <Loading />}
+      {(isLoading && !hasError) && <Loading />}
       {hasError && <ErrorMessage message={error.message} />}
     </div>
   )
